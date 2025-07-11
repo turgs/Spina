@@ -9,4 +9,4 @@ If you're on a Mac you should something like `rbenv` to manage different version
 
 ## Database
 
-You need a database to store all of your content. Spina CMS requires a PostgreSQL database. You can install it using several ways. If you're on a Mac we recommend using `homebrew` so you can simply run `brew install postgresql`.
+You need a database to store all of your content. Spina CMS uses SQLite as its default database, which requires no additional installation or configuration. SQLite is included with Ruby and Rails by default.

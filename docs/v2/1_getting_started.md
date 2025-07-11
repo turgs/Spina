@@ -1,6 +1,6 @@
 # Getting started
 
-Spina is a CMS for Rails 6.1. If you want to get started quickly, create a new Ruby on Rails app with a PostgreSQL database and ActiveStorage enabled and follow these instructions:
+Spina is a CMS for Rails 6.1. If you want to get started quickly, create a new Ruby on Rails app with ActiveStorage enabled and follow these instructions:
 
 Add the following line to your Gemfile:
 
