@@ -7,6 +7,10 @@ class SpinaSearchServiceTest < ActiveSupport::TestCase
     # Skip if not SQLite (FTS tests only work with SQLite)
     skip "FTS tests only work with SQLite" unless ActiveRecord::Base.connection.adapter_name == "SQLite"
     
+    # Clean up any existing test data first
+    Spina::Page.where("name LIKE 'test-page-%'").destroy_all
+    Spina::Resource.where("name LIKE 'test-resource-%'").destroy_all
+    
     # Create test pages
     @page1 = Spina::Page.create!(
       name: "test-page-1",
@@ -28,15 +32,15 @@ class SpinaSearchServiceTest < ActiveSupport::TestCase
     
     # Create test resource
     @resource = Spina::Resource.create!(
-      name: "blog",
+      name: "test-resource-blog",
       label: "Blog Posts"
     )
   end
   
   def teardown
     # Clean up test data
-    Spina::Page.where(name: ["test-page-1", "test-page-2"]).destroy_all
-    Spina::Resource.where(name: "blog").destroy_all
+    Spina::Page.where("name LIKE 'test-page-%'").destroy_all
+    Spina::Resource.where("name LIKE 'test-resource-%'").destroy_all
   end
   
   test "search_pages returns pages matching query" do
