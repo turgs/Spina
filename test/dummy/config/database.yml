@@ -17,6 +17,8 @@ default: &default
     cache_size: 2000
     foreign_keys: true
     temp_store: :memory
+    # Enable FTS for full-text search
+    enable_fts: true
 
 development:
   <<: *default
