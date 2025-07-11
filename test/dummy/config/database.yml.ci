@@ -3,3 +3,11 @@ test:
   database: db/test.sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  # Rails 8 SQLite optimizations
+  pragma:
+    journal_mode: :wal
+    synchronous: :normal
+    mmap_size: 134217728
+    cache_size: 2000
+    foreign_keys: true
+    temp_store: :memory

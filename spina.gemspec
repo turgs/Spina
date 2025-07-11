@@ -33,7 +33,7 @@ Gem::Specification.new do |gem|
 
   gem.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["Rakefile", "README.md"]
 
-  gem.add_dependency "rails", ">= 7.0", "< 9.0"
+  gem.add_dependency "rails", ">= 8.0", "< 9.0"
   gem.add_dependency "sqlite3", ">= 2.0"
   gem.add_dependency "bcrypt"
   gem.add_dependency "image_processing"
