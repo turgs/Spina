@@ -1,9 +1,9 @@
 # Install Spina CMS
 
-Start by creating a new Rails app using a PostgreSQL database.
+Start by creating a new Rails app (SQLite is the default database and works perfectly with Spina).
 
 ```
-rails new yourwebsite --database=postgresql
+rails new yourwebsite
 ```
 
 Create a database.

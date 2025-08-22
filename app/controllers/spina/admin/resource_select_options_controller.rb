@@ -10,8 +10,14 @@ module Spina
       end
 
       def search
-        @resources ||= Resource.all
-        @resources = @resources.where("name ILIKE :query OR label ILIKE :query", query: "%#{params[:search]}%").order(created_at: :desc).distinct.page(params[:page]).per(20)
+        # Use FTS search if available, otherwise fallback to LIKE search
+        if params[:search].present?
+          @resources = Spina::SearchService.search_resources(params[:search])
+        else
+          @resources = Resource.all
+        end
+        
+        @resources = @resources.order(created_at: :desc).distinct.page(params[:page]).per(20)
         render :index
       end
 

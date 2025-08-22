@@ -9,7 +9,7 @@ module Spina
       accounts = Spina::Account.all
 
       [pages, accounts].each do |records|
-        records.update_all("json_attributes = REGEXP_REPLACE(json_attributes::text, '#{old_signed_id}', '#{new_signed_id}', 'g')::jsonb")
+        records.update_all("json_attributes = REPLACE(json_attributes, '#{old_signed_id}', '#{new_signed_id}')")
       end
     end
 
@@ -17,7 +17,7 @@ module Spina
 
     def get_pages(signed_id)
       return Spina::Page.none unless signed_id.present?
-      Spina::Page.where("json_attributes::text LIKE ?", "%#{signed_id}%")
+      Spina::Page.where("json_attributes LIKE ?", "%#{signed_id}%")
     end
   end
 end

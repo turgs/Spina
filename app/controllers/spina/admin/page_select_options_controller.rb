@@ -15,7 +15,17 @@ module Spina
         end
         
         @pages ||= Page.all
-        @pages = @pages.joins(:translations).where("spina_page_translations.title ILIKE :query OR materialized_path ILIKE :query", query: "%#{params[:search]}%").order(created_at: :desc).distinct.page(params[:page]).per(20)
+        
+        # Use FTS search if available, otherwise fallback to LIKE search
+        if params[:search].present?
+          search_options = {
+            resource_id: params[:resource].present? ? Resource.find_by(name: params[:resource])&.id : nil,
+            active_only: true
+          }
+          @pages = Spina::SearchService.search_pages(params[:search], search_options)
+        end
+        
+        @pages = @pages.order(created_at: :desc).distinct.page(params[:page]).per(20)
         render :index
       end
       
